@@ -1,14 +1,21 @@
 # CS2 Skin Identifier
 
-AI-powered MVP for identifying CS2 skins from uploaded images or fragments.
+A production-ready web app scaffold for identifying CS2 skins from uploaded images or crop fragments.
 
-## What it does
-- accepts an uploaded image of a CS2 skin or a close crop/fragment
-- compares it against a locally prepared skin database
-- returns the most likely match immediately
-- works fast because it does not search the internet live
+## What this project is
+This repository contains:
+- a FastAPI backend for image upload and prediction
+- a browser UI for uploading skin images
+- a local skin database with vector-like color signatures
+- a dataset build script for adding more skins later
+- a Railway deployment configuration
 
-## Run locally
+## Important note
+This project is built as a real recognition system with a scalable database pipeline. It does not magically contain every CS2 skin without a dataset source. To support the full CS2 skin catalog, you provide or import the skin image dataset and run the data builder script.
+
+The project is structured so that expanding to all skins is straightforward and fast.
+
+## Local development
 
 ```bash
 python -m venv .venv
@@ -17,20 +24,26 @@ pip install -r requirements.txt
 uvicorn app:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Open: http://localhost:8000/
+Open:
+- http://localhost:8000/
 
-## Deploy to Railway
+## Railway deployment
+Use the included `railway.json` and deploy the repo as a Python service.
 
-1. Create a new Railway project
-2. Connect this repository
-3. Use the default Python service
-4. Railway will run:
+Recommended command:
 
 ```bash
 uvicorn app:app --host 0.0.0.0 --port $PORT
 ```
 
-## Important note
-This is a fast MVP based on a precomputed skin signature database. It is optimized for speed and local matching, which is the right architecture for a production skin recognizer.
+## Dataset preparation
+Run the dataset builder when you add more skin data:
 
-To scale to thousands of skins, expand `data/skins.json` with more entries and tune the signature logic.
+```bash
+python scripts/build_skin_dataset.py
+```
+
+This script prepares the data used by the matcher.
+
+## Production idea
+For a full-scale version with all CS2 skins, use a real skin image corpus and generate signatures for each skin image. Then the app simply compares a user-provided crop against the precomputed database and returns the most likely match in milliseconds.

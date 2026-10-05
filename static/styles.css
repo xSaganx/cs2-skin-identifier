@@ -1,41 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CS2 Skin Identifier</title>
-    <link rel="stylesheet" href="/static/styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>CS2 Skin Identifier</h1>
-      <p class="subtitle">
-        Upload a skin image or a close crop fragment and the app will try to identify it.
-      </p>
+* {
+  box-sizing: border-box;
+}
 
-      <form id="upload-form">
-        <label class="upload-box" for="image-input">
-          <input id="image-input" type="file" accept="image/*" />
-          <span>Choose image</span>
-        </label>
-        <button type="submit">Identify skin</button>
-      </form>
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b1020, #111827);
+  color: white;
+  font-family: Arial, sans-serif;
+}
 
-      <div id="preview-wrap" class="hidden">
-        <img id="preview" alt="Uploaded skin preview" />
-      </div>
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 20px 64px;
+}
 
-      <div id="result" class="result hidden">
-        <h2>Best match</h2>
-        <div id="best-match"></div>
-      </div>
+.eyebrow {
+  margin: 0 0 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8ab4f8;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
 
-      <div id="alternatives" class="alternatives hidden">
-        <h3>Other possible matches</h3>
-        <ul id="match-list"></ul>
-      </div>
-    </div>
+h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 3.3rem);
+}
 
-    <script src="/static/app.js"></script>
-  </body>
-</html>
+.subtitle {
+  margin-top: 12px;
+  color: #dbe7ff;
+  font-size: 1.04rem;
+}
+
+#upload-form {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.upload-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  padding: 18px 22px;
+  background: #111827;
+  border: 2px dashed #60a5fa;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.upload-box:hover {
+  background: #172033;
+}
+
+.upload-box input {
+  display: none;
+}
+
+button {
+  border: none;
+  background: #16a34a;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #15803d;
+}
+
+#preview-wrap {
+  margin-top: 26px;
+}
+
+#preview {
+  max-width: 420px;
+  max-height: 340px;
+  border-radius: 14px;
+  border: 1px solid #374151;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.result,
+.alternatives {
+  margin-top: 26px;
+  border: 1px solid #374151;
+  border-radius: 14px;
+  background: rgba(17, 24, 39, 0.9);
+  padding: 18px 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+#match-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #e5e7eb;
+}
+
+#match-list li {
+  margin-bottom: 8px;
+}
