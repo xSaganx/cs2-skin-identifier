@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS2 Skin Identifier</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>CS2 Skin Identifier</h1>
+      <p class="subtitle">
+        Upload a skin image or a close crop fragment and the app will try to identify it.
+      </p>
+
+      <form id="upload-form">
+        <label class="upload-box" for="image-input">
+          <input id="image-input" type="file" accept="image/*" />
+          <span>Choose image</span>
+        </label>
+        <button type="submit">Identify skin</button>
+      </form>
+
+      <div id="preview-wrap" class="hidden">
+        <img id="preview" alt="Uploaded skin preview" />
+      </div>
+
+      <div id="result" class="result hidden">
+        <h2>Best match</h2>
+        <div id="best-match"></div>
+      </div>
+
+      <div id="alternatives" class="alternatives hidden">
+        <h3>Other possible matches</h3>
+        <ul id="match-list"></ul>
+      </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
