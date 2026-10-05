@@ -40,19 +40,21 @@ def image_signature(image: Image.Image) -> np.ndarray:
         hist_g,
         hist_b,
         np.array([variance], dtype=np.float32),
+        np.zeros(4, dtype=np.float32),
     ]).astype(np.float32)
-    return signature
+    return signature[:32]
 
 
 def match_skin(uploaded_signature: np.ndarray):
     candidates = []
     for skin in SKINS:
         skin_signature = np.asarray(skin["signature"], dtype=np.float32)
-        distance = float(np.linalg.norm(uploaded_signature[:32] - skin_signature[:32]))
+        length = min(uploaded_signature.shape[0], skin_signature.shape[0])
+        distance = float(np.linalg.norm(uploaded_signature[:length] - skin_signature[:length]))
         candidates.append({
             "name": skin["name"],
             "weapon": skin["weapon"],
-            "texture": skin["texture"],
+            "texture": skin.get("texture", "unknown"),
             "palette": skin.get("palette", []),
             "distance": distance,
         })
